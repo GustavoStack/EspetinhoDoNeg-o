@@ -21,4 +21,9 @@ public class Order {
     private String id;
     private String client;
     private List<OrderItems> items;
+    private String street;
+    private String number;
+    private String neighborhood;
+    private String phoneNumber;
+    private String methodPayment;
 }

@@ -24,6 +24,7 @@ public class Products {
     private BigDecimal price;
     private String description;
     private ProductType productType;
+    private String imageUrl;
 
 
 
@@ -32,6 +33,7 @@ public class Products {
         this.description = productDTO.description();
         this.price = productDTO.price();
         this.productType = productDTO.productType();
+        this.imageUrl = productDTO.imageUrl();
     }
 
     public ProductType convertToEnum(ProductType productType) {
@@ -46,6 +48,8 @@ public class Products {
                 return ProductType.FOOD_TYPE;
             case "ACCOMPANIMENT_TYPE":
                 return ProductType.ACCOMPANIMENT_TYPE;
+            case "BEER_TYPE":
+                return ProductType.BEER_TYPE;
             default:
                 throw new IllegalArgumentException("Invalid product type: " + productTypeString);
         }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.EspetinhoDoNegao.DTOs.OrderDTO;
-import com.EspetinhoDoNegao.DTOs.OrderItemDTO;
 import com.EspetinhoDoNegao.domain.entitys.Order;
 import com.EspetinhoDoNegao.domain.entitys.OrderItems;
 import com.EspetinhoDoNegao.repositories.OrderRepository;
@@ -24,6 +23,11 @@ public class OrderService {
         Order order = new Order();
         order.setId(dto.id());
         order.setClient(dto.client());
+        order.setNumber(dto.number());
+        order.setStreet(dto.street());
+        order.setNeighborhood(dto.neighborhood());
+        order.setPhoneNumber(dto.phoneNumber());
+        order.setMethodPayment(dto.methodPayment());
 
         List<OrderItems> items = dto.items().stream().map(itemDto -> {
             OrderItems item = new OrderItems();
@@ -38,5 +42,9 @@ public class OrderService {
         order.setItems(items);
         saveOrder(order);
         return order;
+    }
+
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
     }
 }
