@@ -14,6 +14,9 @@ import com.EspetinhoDoNegao.DTOs.OrderDTO;
 import com.EspetinhoDoNegao.domain.entitys.Order;
 import com.EspetinhoDoNegao.services.OrderService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -24,7 +27,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody OrderDTO orderDTO) {
-        Order order = orderService.createOrder(orderDTO);
+        Order order = this.orderService.createOrder(orderDTO);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
@@ -33,5 +36,11 @@ public class OrderController {
         List<Order> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
-    
+
+    @PutMapping("/{id}/status/{status}")
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable String id, @PathVariable String status) {
+        Order order = orderService.updateOrderStatus(id, status);
+        return new ResponseEntity<>(order, HttpStatus.OK);
+    }
+
 }

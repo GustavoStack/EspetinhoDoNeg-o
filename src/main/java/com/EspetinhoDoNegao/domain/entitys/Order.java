@@ -25,5 +25,6 @@ public class Order {
     private String number;
     private String neighborhood;
     private String phoneNumber;
+    private String status;
     private String methodPayment;
 }

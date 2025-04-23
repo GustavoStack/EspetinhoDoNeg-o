@@ -28,6 +28,7 @@ public class OrderService {
         order.setNeighborhood(dto.neighborhood());
         order.setPhoneNumber(dto.phoneNumber());
         order.setMethodPayment(dto.methodPayment());
+        order.setStatus("Em_andamento");
 
         List<OrderItems> items = dto.items().stream().map(itemDto -> {
             OrderItems item = new OrderItems();
@@ -42,6 +43,13 @@ public class OrderService {
         order.setItems(items);
         saveOrder(order);
         return order;
+    }
+
+    //upadate order status
+    public Order updateOrderStatus(String id, String status) {
+        Order order = orderRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+        order.setStatus(status);
+        return orderRepository.save(order);
     }
 
     public List<Order> getAllOrders(){
